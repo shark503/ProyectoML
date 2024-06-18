@@ -36,8 +36,7 @@ $(document).ready(function() {
                             <div class="card" style="width: 18rem;">
                                 <img src="${response.posters[index]}" class="card-img-top" alt="${movie}">
                                 <div class="card-body">
-                                    <h2 class="card-title">${movie}</h2>
-                                    <p class='card-overview'>${response.overview[index]}</p>
+                                    <h5 class="card-title">${movie}</h5>
                                 </div>
                             </div>`;
                         recommendations.append(movieCard);
