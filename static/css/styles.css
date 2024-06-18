@@ -42,3 +42,7 @@ body {
     font-size: 1em;
     color: #555;
 }
+
+.text-justify {
+    text-align: justify;
+}
