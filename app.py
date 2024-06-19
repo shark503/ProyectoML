@@ -10,10 +10,12 @@ def fetch_poster_and_overview(movie_id):
     data = requests.get(url).json()
     poster_path = data.get('poster_path')
     movie_overview = data.get('overview')
-    if poster_path and movie_overview:
+
+    full_path = None
+    if poster_path:
         full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
-        return full_path, movie_overview
-    return None, None
+        
+    return full_path, movie_overview
 
 
 movies = pickle.load(open("ListaDePelis.pkl", 'rb'))
@@ -47,19 +49,16 @@ def recommend():
         recommend_movies.append(movies.iloc[i[0]].title)
         poster, overview = fetch_poster_and_overview(movie_id)
 
-        if poster and overview:
-            recommend_posters.append(poster)
-            movie_overview.append(overview)
+        if not poster:
+            recommend_posters.append('/static/img/noencontro.png')
         else:
-            if not poster:
-                recommend_posters.append('/static/img/noencontro.png')
-            else:
-                recommend_posters.append(poster)
+            recommend_posters.append(poster)
             
-            if not overview:
-                movie_overview.append('No se encontro descripción')
-            else:
-                movie_overview.append(overview)
+        if not overview:
+            movie_overview.append('No se encontro descripción')
+        else:
+            movie_overview.append(overview)
+            
 
             # Manejar el caso en el que no se encuentra un póster
             
